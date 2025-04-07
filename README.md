@@ -1,39 +1,97 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
-
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
-
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+You can connect everything into everything pretty easily
 
 ```dart
-const like = 'sample';
+// Run fluf app instead of run app
+void main() => runFlufApp(
+  // Connect app
+  app: MyApp(),
+  
+  // Connect firebase options
+  options: DefaultFirebaseOptions.currentPlatform,
+  
+  // Register crud here
+  onRegisterCrud:
+      () =>
+          $crud..registerModel(
+            FireModel<MyUser>(
+              model: MyUser(),
+              collection: "user",
+              fromMap: (_) => MyUser(),
+              toMap: (_) => {},
+            ),
+          ),
+  
+  // Register services here
+  onRegisterServices:
+      () => services()..register<UserService>(() => UserService()),
+  setupMetaSEO: false,
+  authAllowAnonymous: false,
+  authAutoLink: true,
+  authOnBind: svc<UserService>().bind,
+  authOnUnbind: svc<UserService>().unbind,
+  authSignInConfigs: [],
+);
+
+// Authenticated Arcane App
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) => AuthenticatedArcaneApp(
+    home: Placeholder(),
+    authMethods: [AuthMethod.emailPassword],
+  );
+}
+
+/// GENERIC USER MODELS
+class MyUser with ModelCrud {
+  @override
+  List<FireModel<ModelCrud>> get childModels => [
+    FireModel<MyCapabilities>(
+      model: MyCapabilities(),
+      collection: "data",
+      exclusiveDocumentId: "capabilities",
+      fromMap: (_) => MyCapabilities(),
+      toMap: (_) => {},
+    ),
+    FireModel<MySettings>(
+      model: MySettings(),
+      collection: "data",
+      exclusiveDocumentId: "settings",
+      fromMap: (_) => MySettings(),
+      toMap: (_) => {},
+    ),
+  ];
+}
+
+class MyCapabilities with ModelCrud {
+  @override
+  List<FireModel<ModelCrud>> get childModels => [];
+}
+
+class MySettings with ModelCrud {
+  @override
+  List<FireModel<ModelCrud>> get childModels => [];
+}
+
+/// CONNECT USER SERVICE
+Stream<MyUser?> get $userStream => svc<UserService>().$userStream;
+Stream<MySettings?> get $settingsStream => svc<UserService>().$settingsStream;
+Stream<MyCapabilities?> get $capabilitiesStream =>
+    svc<UserService>().$capabilitiesStream;
+MyUser get $user => svc<UserService>().$user;
+MySettings get $settings => svc<UserService>().$settings;
+MyCapabilities get $capabilities => svc<UserService>().$capabilities;
+
+// User service macro
+class UserService extends FlufUserService<MyUser, MyCapabilities, MySettings> {
+  @override
+  MyCapabilities createUserCapabilitiesModel(UserMeta meta) => MyCapabilities();
+
+  @override
+  MyUser createUserModel(UserMeta meta) => MyUser();
+
+  @override
+  MySettings createUserSettingsModel(UserMeta meta) => MySettings();
+}
 ```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
