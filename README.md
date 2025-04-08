@@ -2,35 +2,25 @@ You can connect everything into everything pretty easily
 
 ```dart
 // Run fluf app instead of run app
-void main() => runFlufApp(
-  // Connect app
-  app: MyApp(),
+void main() => runApp("my_app_id", ArcaneFluf(
   
   // Connect firebase options
   options: DefaultFirebaseOptions.currentPlatform,
   
-  // Register crud here
-  onRegisterCrud:
-      () =>
-          $crud..registerModel(
-            FireModel<MyUser>(
-              model: MyUser(),
-              collection: "user",
-              fromMap: (_) => MyUser(),
-              toMap: (_) => {},
-            ),
-          ),
+  // register crud models
+  onRegisterCrud: () => $crud..registerModel(
+    FireModel<MyUser>(
+      model: MyUser(),
+      collection: "user",
+      fromMap: (_) => MyUser(),
+      toMap: (_) => {},
+    ),
+  ),
   
-  // Register services here
-  onRegisterServices:
-      () => services()..register<UserService>(() => UserService()),
-  setupMetaSEO: false,
-  authAllowAnonymous: false,
-  authAutoLink: true,
-  authOnBind: svc<UserService>().bind,
-  authOnUnbind: svc<UserService>().unbind,
-  authSignInConfigs: [],
-);
+  // Connect our user service
+  onRegisterUserService: () => services().register<UserService>(() => UserService()),
+  child: const MyApp()
+));
 
 // Authenticated Arcane App
 class MyApp extends StatelessWidget {
@@ -38,8 +28,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => AuthenticatedArcaneApp(
-    home: Placeholder(),
-    authMethods: [AuthMethod.emailPassword],
+    home: Placeholder(), // Your home screen
+    authConfig: AuthConfig(
+      // Setup Auth methods
+      authMethods: [AuthMethod.emailPassword],
+      // Connect user service binding events
+      onBind: (u) async => svc<UserService>().bind(u),
+      onUnbind: () async => svc<UserService>().unbind(),
+    )
   );
 }
 
@@ -84,7 +80,7 @@ MySettings get $settings => svc<UserService>().$settings;
 MyCapabilities get $capabilities => svc<UserService>().$capabilities;
 
 // User service macro
-class UserService extends FlufUserService<MyUser, MyCapabilities, MySettings> {
+class UserService extends ArcaneUserService<MyUser, MyCapabilities, MySettings> {
   @override
   MyCapabilities createUserCapabilitiesModel(UserMeta meta) => MyCapabilities();
 
@@ -95,3 +91,5 @@ class UserService extends FlufUserService<MyUser, MyCapabilities, MySettings> {
   MySettings createUserSettingsModel(UserMeta meta) => MySettings();
 }
 ```
+
+For More info see [arcane_user](https://pb.dev/packages/arcane_user) for the user service, and [arcane_auth](https://pb.dev/packages/arcane_auth) for the authentication methods.

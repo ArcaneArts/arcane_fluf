@@ -22,9 +22,9 @@ Widget ArcaneFluf({
   debugFirestoreLogging: debugFirestoreLogging,
   debugFirestoreThrowOnGet: debugFirestoreLogging,
   child: ArcaneFlufCore(
-    child: child,
     onRegisterUserService: onRegisterUserService,
     splashScreenAutoRemove: splashScreenAutoRemove,
+    child: child,
   ),
 );
 

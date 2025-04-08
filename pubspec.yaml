@@ -1,6 +1,6 @@
 name: arcane_fluf
 description: "Flutterfire for Arcane"
-version: 1.0.1
+version: 1.0.2
 repository: https://github.com/ArcaneArts/arcane_fluf
 environment:
   sdk: ^3.7.0
