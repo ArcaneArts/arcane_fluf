@@ -1,6 +1,6 @@
 name: arcane_fluf
 description: "Flutterfire for Arcane"
-version: 1.0.0
+version: 1.0.1
 repository: https://github.com/ArcaneArts/arcane_fluf
 environment:
   sdk: ^3.7.0
@@ -8,40 +8,18 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  rxdart: ">=0.27.0 <1.0.0"
-  toxic_flutter: ">=1.1.0 <2.0.0"
   firebase_core: ">=3.13.0 <4.0.0" 
-  firebase_auth: ">=5.5.0 <6.0.0"
-  cloud_firestore: ">=5.6.0 <6.0.0"
   firebase_analytics: ">=11.4.0 <12.0.0"
-  firebase_crashlytics: ">=4.3.0 <5.0.0"
-  firebase_performance: ">=0.10.0 <1.0.0"
-  firebase_storage: ">=12.4.5 <13.0.0"
-  firebase_messaging: ">=15.2.5 <16.0.0"
   flutter_native_splash: ">=2.4.6 <3.0.0"
-  hive: ">=2.2.0 <3.0.0"
-  hive_flutter: ">=1.1.0 <=2.0.0"
   serviced: ">=1.0.0 <2.0.0"
-  arcane: ">=5.0.0 <6.0.0"
-  arcane_auth: ">=1.6.1 <2.0.0"
-  fire_api: ">=1.2.0 <2.0.0"
-  fire_api_flutter: ">=1.3.0 <2.0.0"
+  arcane: ">=5.3.1 <6.0.0"
+  arcane_auth: ">=1.7.1 <2.0.0"
   fire_crud: ">=2.3.12 <3.0.0"
-  fire_crud_flutter: ">=1.2.17 <2.0.0"
-  pylon: ">=3.1.10 <4.0.0"
   toxic: ">=1.3.0 <2.0.0"
-  haptic_feedback: ">=0.5.0 <1.0.0"
-  device_info_plus: ">=11.3.0 <12.0.0"
-  flutter_local_notifications: ">=19.0.0 <20.0.0"
-  crypto: ">=3.0.0 <4.0.0"
-  dart_mappable: ">=4.5.0 <5.0.0"
   fast_log: ">=1.0.0 <2.0.0"
+  arcane_fire: ">=1.0.0 <2.0.0"
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
-  build_runner: ^2.4.15
-  dart_mappable_builder: ^4.5.0
 flutter:
-scripts:
-  build: flutter pub run build_runner build --delete-conflicting-outputs

@@ -4,6 +4,7 @@ import 'package:arcane/arcane.dart';
 import 'package:arcane_auth/arcane_auth.dart';
 import 'package:fast_log/fast_log.dart';
 import 'package:fire_crud/fire_crud.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:serviced/serviced.dart';
 
 abstract class FlufUserService<
@@ -82,6 +83,10 @@ abstract class FlufUserService<
     } catch (e, es) {}
 
     try {
+      await FirebaseAnalytics.instance.setUserId(id: user.user.uid);
+    } catch (e, es) {}
+
+    try {
       await onPostBind(_user.value!);
       // TODO: await svc<NotificationService>().onBind();
     } catch (e, es) {
@@ -101,6 +106,10 @@ abstract class FlufUserService<
     _settings.add(null);
     _capabilities.add(null);
     // TODO: await svc<NotificationService>().onUnbind();
+    try {
+      await FirebaseAnalytics.instance.setUserId(id: null);
+    } catch (e) {}
+
     try {
       await onPostUnbind();
     } catch (e, es) {
