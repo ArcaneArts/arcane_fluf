@@ -1,3 +1,6 @@
+# 1.2.0
+* Fire Crud 3
+
 # 1.1.0
 * FCM Notification Services
 

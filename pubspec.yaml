@@ -1,6 +1,6 @@
 name: arcane_fluf
 description: "Flutterfire for Arcane"
-version: 1.1.0
+version: 1.2.0
 repository: https://github.com/ArcaneArts/arcane_fluf
 environment:
   sdk: ^3.7.0
@@ -12,12 +12,12 @@ dependencies:
   firebase_analytics: ">=11.4.0 <12.0.0"
   flutter_native_splash: ">=2.4.6 <3.0.0"
   serviced: ">=1.0.0 <2.0.0"
-  arcane: ">=5.3.1 <6.0.0"
+  arcane: ">=5.3.7 <6.0.0"
   arcane_auth: ">=1.7.1 <2.0.0"
-  fire_crud: ">=2.3.12 <3.0.0"
+  fire_crud: ">=3.0.0 <4.0.0"
   toxic: ">=1.3.0 <2.0.0"
   fast_log: ">=1.0.0 <2.0.0"
-  arcane_fire: ">=1.0.0 <2.0.0"
+  arcane_fire: ">=1.0.2 <2.0.0"
   arcane_fcm: ">=1.0.0 <2.0.0"
 dev_dependencies:
   flutter_test:
