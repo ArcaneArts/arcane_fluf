@@ -1,3 +1,6 @@
+# 1.2.1
+* Upgrade Firebase
+
 # 1.2.0
 * Fire Crud 3
 
