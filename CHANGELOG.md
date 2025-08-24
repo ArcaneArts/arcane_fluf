@@ -1,3 +1,6 @@
+# 1.3.0
+* Upgrade to Arcane 6
+
 # 1.2.1
 * Upgrade Firebase
 
