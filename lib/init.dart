@@ -11,10 +11,12 @@ Widget ArcaneFluf({
   bool debugFirestoreLogging = false,
   bool debugFirestoreThrowOnGet = false,
   bool splashScreenAutoRemove = true,
+  String rootPrefix = "",
 
   /// Register your user service with () => services().register<YourUserService>(() => YourUserService());
   required Function(ServiceProvider) onRegisterServices,
 }) => ArcaneFire(
+  rootPrefix: rootPrefix,
   options: options,
   onRegisterCrud: onRegisterCrud,
   debugFirestoreLogging: debugFirestoreLogging,

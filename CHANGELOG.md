@@ -1,3 +1,6 @@
+# 1.3.1.
+* Support root prefixes
+
 # 1.3.0
 * Upgrade to Arcane 6
 
